@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project|Search Product</title>
+    <title>Final Project|Search p</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </head>
@@ -46,42 +46,141 @@
 
 
     <div class="container mx-auto my-8">
-        <h1 class="text-2xl font-bold mb-4">Search Product</h1>
+        <h1 class="text-2xl font-bold mb-4">Search phone</h1>
         <form class="flex mb-4">
-            <input id="searchInput" class="border border-gray-400 py-2 px-4 w-full rounded-md mr-2" type="text" placeholder="Search for a product...">
+            <input id="searchInput" class="border border-gray-400 py-2 px-4 w-full rounded-md mr-2" type="text"  placeholder="Search for a phone name">
             <button id="searchBtn" class="bg-blue-600 text-white py-2 px-4 rounded-md"><i class="fas fa-search"></i> Search</button>
         </form>
         <div id="searchResult" class="flex mx-20 flex-wrap justify-center"></div>
     </div>
 
+
+
+
+
+
+
+
+
+
+    <div class="container mx-auto">
+      <table class="w-full ">
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+      </table>
+    </div>
+    <script src="node_modules/axios/dist/axios.min.js"></script>
     <script>
-        const products = [
-            { id: 1, name: "Product A", price: "$10", image: "https://via.placeholder.com/150" },
-            { id: 2, name: "Product B", price: "$20", image: "https://via.placeholder.com/150" },
-            { id: 3, name: "Product C", price: "$30", image: "https://via.placeholder.com/150" },
-            { id: 4, name: "Product D", price: "$40", image: "https://via.placeholder.com/150" },
-            { id: 5, name: "Product E", price: "$50", image: "https://via.placeholder.com/150" }
-        ];
 
-        const searchInput = document.getElementById("searchInput");
-        const searchBtn = document.getElementById("searchBtn");
-        const searchResult = document.getElementById("searchResult");
 
-        searchBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm));
-            const html = filteredProducts.map(product => {
-                return `
-                    <div class="m-auto">
-                        <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-contain rounded-md">
-                        <div class="font-bold">${product.name}</div>
-                        <div>${product.price}</div>
-                    </div>
-                `;
-            }).join("");
-            searchResult.innerHTML = html;
-        });
+
+
+
+
+
+
+
+axios.get('https://aurora-team.com/task/public/api')
+
+  .then(function (response) {
+    const tableBody = document.getElementById('table-body');
+    console.log(response.data)
+    
+    response.data.forEach(item => {
+      const row = document.createElement('tr');
+
+      const nameCell = document.createElement('td');
+      nameCell.className = "text-xl font-semibold text-center border w-80";
+      nameCell.textContent = item.name;
+      nameCell.setAttribute("iteid", item.id);
+
+      let i=nameCell.getAttribute("iteid")
+        nameCell.addEventListener("click",function(){
+          window.localStorage.setItem("id",i)
+          window.location.href = "by.html";
+        })
+
+
+      row.appendChild(nameCell);
+
+      
+      const detailsCell = document.createElement('td');
+      detailsCell.className = "text-center border w-80";
+      detailsCell.textContent = item.details;
+      row.appendChild(detailsCell);
+      
+      const imageCell = document.createElement('td');
+          const image = document.createElement('img');  
+          image.className = "text-center border w-80 h-32";
+          image.src = item.image;
+          image.alt = item.title;
+          imageCell.appendChild(image);
+          row.appendChild(imageCell);
+      
+      const priceCell = document.createElement('td');
+      priceCell.textContent = item.price;
+      priceCell.className = "text-center border w-80";
+
+      row.appendChild(priceCell);
+      
+      tableBody.appendChild(row);
+
+
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // const products = [
+        //     { id: 1, name: "Product A", price: "$10", image: "https://via.placeholder.com/150" },
+        //     { id: 2, name: "Product B", price: "$20", image: "https://via.placeholder.com/150" },
+        //     { id: 3, name: "Product C", price: "$30", image: "https://via.placeholder.com/150" },
+        //     { id: 4, name: "Product D", price: "$40", image: "https://via.placeholder.com/150" },
+        //     { id: 5, name: "Product E", price: "$50", image: "https://via.placeholder.com/150" }
+        // ];
+
+        // const searchInput = document.getElementById("searchInput");
+        // const searchBtn = document.getElementById("searchBtn");
+        // const searchResult = document.getElementById("searchResult");
+
+        // searchBtn.addEventListener("click", (e) => {
+        //     e.preventDefault();
+        //     const searchTerm = searchInput.value.toLowerCase();
+        //     const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm));
+        //     const html = filteredProducts.map(product => {
+        //         return `
+        //             <div class="m-auto">
+        //                 <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-contain rounded-md">
+        //                 <div class="font-bold">${product.name}</div>
+        //                 <div>${product.price}</div>
+        //             </div>
+        //         `;
+        //     }).join("");
+        //     searchResult.innerHTML = html;
+        // });
     </script>
 </body>
-</html>
+</html> -->

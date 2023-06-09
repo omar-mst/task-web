@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Final | Our-Product</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
+
+
+
+
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="https://flowbite.com/" class="flex items-center">
@@ -38,78 +43,83 @@
           </div>
         </div>
   </nav>
+
+
     <div class="container mx-auto">
-      <table class="w-full mt-20">
-        <thead>
-          <tr class="bg-slate-400">
-            <th  class="border px-4 py-2">Title</th>
-            <th  class="border px-4 py-2">Description</th>
-            <th  class="border px-4 py-2">image</th>
-            <th  class="border px-4 py-2">Price</th>
-          </tr>
-        </thead>
-        <tbody id="table-body">
-        </tbody>
-      </table>
-    </div>
+        <table class="w-full mt-20">
+          <thead>
+            <tr class="bg-slate-400">
+              <th  class="border px-4 py-2">Title</th>
+              <th  class="border px-4 py-2">Description</th>
+              <th  class="border px-4 py-2">image</th>
+              <th  class="border px-4 py-2">Price</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+        <div class="text-center">
+            <button type="button" id="btn-more" class="mt-20 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onclick="bymore()">by more</button>
+            <button type="button" class="mt-20 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onclick="by()">by this phone</button>
+        </div>
+        </div>
+</body>
 
-    <script src="node_modules/axios/dist/axios.min.js"></script>
-    <script>
 
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script>
+    let btnmore=document.getElementById("btn-more");
+    btnmore.style.display="none";
+
+    var ii=window.localStorage.getItem("id")
+    ii--;
+    
 axios.get('https://aurora-team.com/task/public/api')
 
-  .then(function (response) {
-    const tableBody = document.getElementById('table-body');
-    console.log(response.data)
+.then(function (response) {
+  let tableBody = document.getElementById('table-body');
+  
+  let row = document.createElement('tr');
+  let nameCell = document.createElement('td');
+  nameCell.className = "text-xl font-semibold text-center border w-80";
+  nameCell.textContent = response.data[ii].name;
+
+  row.appendChild(nameCell);
+
+  let detailsCell = document.createElement('td');
+  detailsCell.className = "text-center border w-80";
+  detailsCell.textContent = response.data[ii].details;
+
+  row.appendChild(detailsCell);
+
     
-    response.data.forEach(item => {
-      const row = document.createElement('tr');
+    let imageCell = document.createElement('td');
+        let image = document.createElement('img');  
+        image.className = "text-center border w-80 h-32";
+        image.src = response.data[ii].image;
+        image.alt = response.data[ii].title;
+        imageCell.appendChild(image);
+        row.appendChild(imageCell);
+    
+    var priceCell = document.createElement('td');
+    priceCell.textContent = response.data[ii].price;
+    priceCell.className = "text-center border w-80";
+    row.appendChild(priceCell);
 
-      const nameCell = document.createElement('td');
-      nameCell.className = "text-xl font-semibold text-center border w-80";
-      nameCell.textContent = item.name;
-      nameCell.setAttribute("iteid", item.id);
-
-      let i=nameCell.getAttribute("iteid")
-        nameCell.addEventListener("click",function(){
-          window.localStorage.setItem("id",i)
-          window.location.href = "by.html";
-        })
-
-
-      row.appendChild(nameCell);
-
-      
-      const detailsCell = document.createElement('td');
-      detailsCell.className = "text-center border w-80";
-      detailsCell.textContent = item.details;
-      row.appendChild(detailsCell);
-      
-      const imageCell = document.createElement('td');
-          const image = document.createElement('img');  
-          image.className = "text-center border w-80 h-32";
-          image.src = item.image;
-          image.alt = item.title;
-          imageCell.appendChild(image);
-          row.appendChild(imageCell);
-      
-      const priceCell = document.createElement('td');
-      priceCell.textContent = item.price;
-      priceCell.className = "text-center border w-80";
-
-      row.appendChild(priceCell);
-      
-      tableBody.appendChild(row);
-
-
-    });
-  })
-  .catch(function (error) {
+    window.localStorage.setItem("price",response.data[ii].price)
+    
+    tableBody.appendChild(row);
+})
+.catch(function (error) {
     console.log(error);
-  });
-
-
-    </script>
-    
-  </body>
+});
+function bymore(){
+        window.location.href = "index.html";
+    }
+function by(){
+        let o=(localStorage.getItem("price"))
+        alert(`the price is ${o}`)
+            btnmore.style.display="block"
+        }
+</script>
 </html>

@@ -10,17 +10,17 @@
 </head>
 <body style="background-color: #a6a7bd;">
      <section class="relative">
-        <div class="flex flex-col items-center justify-center px-6 opacity-75 py-8 mx-auto md:h-screen lg:py-0"> 
-            <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-md  xl:p-0" style="background-color: #747484;">
-                <a href="#" class="flex justify-center my-6 text-2xl font-semibold">
+        <div class="flex flex-col items-center justify-center px-6 opacity-75 py-8 md:h-screen"> 
+            <div class="w-full rounded-lg md:max-w-md" style="background-color: #747484;">
+                <span class="flex justify-center my-6 text-2xl font-semibold">
                     Login    
-                </a>
+                </span>
                 <img src="./images/iphone_14.png" class="absolute opacity-50 hidden lg:-ml-40 lg:flex md:hidden">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <form class="space-y-4 md:space-y-6 z-50 relative" action="home.html">
                         <div>
                             <label  class="block mb-2 text-sm font-medium text-white" >UserName:</label>
-                            <input type="User Name" name="User Name" maxlength="12" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="omar misto" required="">
+                            <input type="text" name="User Name" maxlength="12" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="omar misto" required="">
                         </div>
                         <div>
                             <label class="block mb-2 text-sm font-medium text-white ">Password:</label>
@@ -44,21 +44,11 @@
             </div>
         </div>
       </section>
-    <!-- <script src="js/main.js"></script> -->
 
     <script>
-
-        // window.onload=function(){
-        //     if(this.localStorage.getItem('name')){
-        //         window.location.href='./home.html';
-        //     }
-        // };
-
-        
         window.onload=function(){
                 window.localStorage.clear()
             }
-
         let name1=document.getElementById("username");
         maxLength = name1.getAttribute("maxlength");
 
